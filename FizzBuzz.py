@@ -8,6 +8,10 @@ df.display()
 
 # COMMAND ----------
 
+df.select(col("id").alias("Numbers")).count()
+
+# COMMAND ----------
+
 df_threes = df.withColumn(
     "multipleOfThree",
     when((col("id") % lit(3)) == 0 , 1)
