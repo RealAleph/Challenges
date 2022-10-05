@@ -1,8 +1,4 @@
 # Databricks notebook source
-from pyspark.sql.functions import lit, col, when, upper
-
-# COMMAND ----------
-
 @udf
 def fizzbuzzer(i):
     if i % 3 == 0 and i % 5 == 0:
@@ -13,6 +9,11 @@ def fizzbuzzer(i):
         return('buzz')
     else:
         return(i)
+
+# COMMAND ----------
+
+df = spark.range(1, 101)
+df.withColumn("FizzBuzz", fizzbuzzer(df.id)).display()
 
 # COMMAND ----------
 
@@ -28,9 +29,9 @@ def fizzbuzzer(i):
 
 # COMMAND ----------
 
-df = spark.range(1, 1000000, 1)
-df.display()
+
+# df.display()
 
 # COMMAND ----------
 
-df.withColumn("FizzBuzz", fizzbuzzer(col("id")))
+# df.withColumn("FizzBuzz", fizzbuzzer(col("id")))
